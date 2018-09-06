@@ -25,13 +25,17 @@ export default function createRoutes(store) {
           System.import('containers/HomePage'),
           System.import('containers/NavigationContainer/reducer'), // need to import reducer
           System.import('containers/NavigationContainer/sagas'), // need to import sagas
+          System.import('containers/LinkListContainer/reducer'), // need to import reducer
+          System.import('containers/LinkListContainer/sagas'), // need to import sagas
         ]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([component, reducer, sagas]) => { // add reducer, sagas
-          injectReducer('navigationContainer', reducer.default);
-          injectSagas('navigationContainer', sagas.default);
+        importModules.then(([component, navigationReducer, navigationSagas, linkListReducer, linkListSagas]) => { // add reducer, sagas
+          injectReducer('navigationContainer', navigationReducer.default);
+          injectSagas('navigationContainer', navigationSagas.default);
+          injectReducer('linkListContainer', linkListReducer.default);
+          injectSagas('linkList', linkListSagas.default); /// TBA...
           renderRoute(component);
         });
 
