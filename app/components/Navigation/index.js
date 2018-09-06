@@ -13,7 +13,7 @@ import styles from './styles.css';
 function Navigation({ topics, selectTopic }) {
   // create as const
   const topicNodes = topics.map(t => (
-    <div 
+    <div
       key={t.name}
       onClick={() => selectTopic(t)}
     >
