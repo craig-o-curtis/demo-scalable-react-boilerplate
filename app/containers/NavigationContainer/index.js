@@ -8,7 +8,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import selectNavigationContainer from './selectors';
 import Navigation from '../../components/Navigation';
-import { requestTopics, selectTopic } from './actions'; // import action creators
+import { requestTopics, selectTopic, toggleDrawer } from './actions'; // import action creators
 
 export class NavigationContainer extends React.Component { // eslint-disable-line react/prefer-stateless-function
   // create propType rules
@@ -39,6 +39,8 @@ function mapDispatchToProps(dispatch) {
     // DOWNWARD PROP - made available for inner Navigation component to use dispatch
       // this is passed down AGAIN through {...this.props} in <Navigation {...this.props} />
     selectTopic: (topic) => dispatch(selectTopic(topic)),
+    // only emits action event, used in Navigation component
+    toggleDrawer: () => dispatch(toggleDrawer()),
   };
 }
 

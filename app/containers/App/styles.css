@@ -4,6 +4,19 @@
  * App container styles
  */
 
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700);
+
+body {
+  font-size: 16px;
+  margin: 1rem;
+  background-color: #E5E5E5;
+}
+
 .container {
   display: block;
+  background-color: #E5E5E5;
+}
+
+* {
+  box-sizing: border-box;
 }

@@ -5,27 +5,33 @@
 */
 
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import AppBar from '../AppBar';
+import Drawer from '../Drawer';
 
 import styles from './styles.css';
 
-function Navigation({ topics, selectTopic }) {
+function Navigation({ topics, selectTopic, toggleDrawer, isDrawerOpen }) {
   // create as const
-  const topicNodes = topics.map(t => (
-    <div
-      key={t.name}
-      onClick={() => selectTopic(t)}
-    >
-      {t.name}
-    </div>
-  ));
+  // const topicNodes = topics.map(t => (
+  //   <div
+  //     key={t.name}
+  //     onClick={() => selectTopic(t)}
+  //   >
+  //     {t.name}
+  //   </div>
+  // ));
 
   return (
     <div className={styles.navigation}>
-      {topicNodes}
-      <FontAwesomeIcon icon="check-square" />
-      Favorite beverage: <FontAwesomeIcon icon="coffee" />
+      <AppBar toggleDrawer={toggleDrawer} />
+      <Drawer
+        items={topics}
+        selectItem={selectTopic}
+        itemLabelAttr="name"
+        itemKeyAttr="name"
+        isDrawerOpen={isDrawerOpen}
+      />
+      {/* {topicNodes} */}
     </div>
   );
 }
@@ -38,6 +44,8 @@ Navigation.propTypes = {
     })
   ).isRequired,
   selectTopic: React.PropTypes.func.isRequired,
+  toggleDrawer: React.PropTypes.func.isRequired,
+  isDrawerOpen: React.PropTypes.bool.isRequired,
 };
 
 export default Navigation;

@@ -21,10 +21,6 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import useScroll from 'react-router-scroll';
 import LanguageProvider from 'containers/LanguageProvider';
 import configureStore from './store';
-// fortawesome
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { fab } from '@fortawesome/free-brands-svg-icons';
-import { faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 // Import i18n messages
 import { translationMessages } from './i18n';
@@ -96,7 +92,7 @@ if (!window.Intl) {
 }
 
 // configure fortawesome
-library.add(fab, faCheckSquare, faCoffee);
+// library.add(fab, faCheckSquare, faCoffee);
 
 // Install ServiceWorker and AppCache in the end since
 // it's not most important operation and if main code fails,
