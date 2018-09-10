@@ -25,23 +25,50 @@ export default function createRoutes(store) {
           System.import('containers/HomePage'),
           System.import('containers/NavigationContainer/reducer'), // need to import reducer
           System.import('containers/NavigationContainer/sagas'), // need to import sagas
-          System.import('containers/LinkListContainer/reducer'), // need to import reducer
-          System.import('containers/LinkListContainer/sagas'), // need to import sagas
+          // System.import('containers/LinkListContainer/reducer'), // need to import reducer // REMOVE
+          // System.import('containers/LinkListContainer/sagas'), // need to import sagas // REMOVE
         ]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([component, navigationReducer, navigationSagas, linkListReducer, linkListSagas]) => { // add reducer, sagas
+        importModules.then(([
+          component,
+          navigationReducer,
+          navigationSagas,
+          // linkListReducer, // REMOVE
+          // linkListSagas // REMOVE
+        ]) => { // add reducer, sagas
           injectReducer('navigationContainer', navigationReducer.default);
           injectSagas('navigationContainer', navigationSagas.default);
-          injectReducer('linkListContainer', linkListReducer.default);
-          injectSagas('linkList', linkListSagas.default); /// TBA...
+          // injectReducer('linkListContainer', linkListReducer.default); // REMOVE
+          // injectSagas('linkList', linkListSagas.default); /// TBA... // REMOVE
           renderRoute(component);
         });
 
         importModules.catch(errorLoading);
       },
-    }, {
+      childRoutes: [
+        {
+          path: '/topics/:topicName',
+          name: 'linkListContainer',
+          getComponent(nextState, cb) {
+            const importModules = Promise.all([
+              System.import('containers/LinkListContainer/reducer'),
+              System.import('containers/LinkListContainer/sagas'),
+              System.import('containers/LinkListContainer'),
+            ]);
+            const renderRoute = loadModule(cb);
+            importModules.then(([reducer, sagas, component]) => {
+              injectReducer('linkListContainer', reducer.default);
+              injectSagas('linkListContainer', sagas.default); // add string to point to linkListContainer
+              renderRoute(component);
+            });
+            importModules.catch(errorLoading);
+          },
+        },
+      ],
+    },
+    {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {

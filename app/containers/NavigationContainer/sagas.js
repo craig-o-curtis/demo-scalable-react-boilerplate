@@ -1,8 +1,9 @@
 // import { take, call, put, select } from 'redux-saga/effects';
-import { REQUEST_TOPICS } from './constants';
+import { REQUEST_TOPICS, SELECT_TOPIC } from './constants';
 import { takeLatest } from 'redux-saga';
 import { call, put } from 'redux-saga/effects'; // call to call a function, put to dispatch a redux action
 import { requestTopicsSucceeded, requestTopicsFailed } from './actions';
+import { push } from 'react-router-redux';
 
 // actual promise logic
 export function fetchTopicsFromServer() {
@@ -29,7 +30,17 @@ export function* fetchTopicsSaga() {
   yield* takeLatest(REQUEST_TOPICS, fetchTopics);
 }
 
+// handle logic to change url
+function* pushTopic(action) {
+  // put means to fire an action/ dispatch an action
+  yield put(push(`/topics/${action.topic.name}`));
+}
+export function* selectTopicSaga() {
+  yield* takeLatest(SELECT_TOPIC, pushTopic);
+}
+
 // All sagas to be loaded
 export default [
   fetchTopicsSaga,
+  selectTopicSaga,
 ];
