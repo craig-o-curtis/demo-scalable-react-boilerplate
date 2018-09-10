@@ -24,7 +24,7 @@ function Drawer({ items, selectItem, itemLabelAttr, itemKeyAttr, isDrawerOpen })
   // {/* use [] in classNames for computed attributes */}
   // {/* ** Toggling of isDrawerOpen happens in NavigationContainer reducer.js */}
   return (
-    <div className={classNames(styles.drawer, { [ styles.drawerOpen]:isDrawerOpen })}>
+    <div className={classNames(styles.drawer, { [styles.drawerOpen]: isDrawerOpen })}>
       {itemNodes}
     </div>
   );
