@@ -22,6 +22,9 @@ function navigationContainerReducer(state = initialState, action) {
     case REQUEST_TOPICS_SUCCEEDED:
       // .set from IMMUTABLE.js
       return state.set('topics', action.topics);
+    case '@@router/LOCATION_CHANGE':
+      // update router data to state
+      return state.set('routerLocation', action.payload.pathname);
     case SELECT_TOPIC:
       return state.set('selectedTopic', action.topic).set('isDrawerOpen', false);
     case TOGGLE_DRAWER:
