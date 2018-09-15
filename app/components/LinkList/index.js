@@ -11,7 +11,7 @@ import Link from '../Link';
 import styles from './styles.css';
 
 
-function LinkList({ links, topicName }) {
+function LinkList({ links, topicName, children }) {
   const linkNodes = links.map(l => (
     <Link
       key={l.id}
@@ -22,12 +22,14 @@ function LinkList({ links, topicName }) {
     <div className={styles.linkList}>
       <h1>{topicName}</h1>
       {linkNodes}
+      {children}
     </div>
   );
 }
 
 // add proptype validation
 LinkList.propTypes = {
+  children: React.PropTypes.element,
   topicName: React.PropTypes.string.isRequired,
   links: React.PropTypes.arrayOf(React.PropTypes.shape(
     {
