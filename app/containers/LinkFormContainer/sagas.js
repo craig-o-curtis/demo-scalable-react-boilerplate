@@ -1,11 +1,35 @@
 // import { take, call, put, select } from 'redux-saga/effects';
+import { ADD_LINK, ADD_LINK_CANCELLED } from './constants';
+import { takeLatest } from 'redux-saga';
+import { call, put } from 'redux-saga/effects';
+import { createLink } from '../../api';
 
-// Individual exports for testing
-export function* defaultSaga() {
-  return;
+import { addLinkSuccess, addLinkFailed } from './actions';
+import { goBack } from 'react-router-redux';
+
+
+// add link
+function* addLink(action) {
+  try {
+    const serverLink = yield call(createLink, action.link);
+    yield put(addLinkSuccess(serverLink));
+    yield put(goBack()); // goes back to previous location
+  } catch (error) {
+    yield put(addLinkFailed(action.link, error.message));
+  }
+}
+
+export function* addLinkSaga() {
+  yield* takeLatest(ADD_LINK, addLink);
+}
+
+// add link cancelled
+export function* addLinkCancelledSaga() {
+  yield* takeLatest(ADD_LINK_CANCELLED, () => put(goBack()));
 }
 
 // All sagas to be loaded
 export default [
-  defaultSaga,
+  addLinkSaga,
+  addLinkCancelledSaga,
 ];

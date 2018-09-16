@@ -7,6 +7,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import selectLinkFormContainer from './selectors';
+import { addLink, addLinkCancelled } from './actions';
 
 import LinkForm from '../../components/LinkForm';
 
@@ -22,7 +23,8 @@ const mapStateToProps = selectLinkFormContainer();
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    addLink: (link) => dispatch(addLink(link)),
+    addLinkCancelled: () => dispatch(addLinkCancelled()),
   };
 }
 

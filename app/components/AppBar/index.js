@@ -5,9 +5,8 @@
 */
 
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router';
+import IconButton from '../IconButton';
 
 import styles from './styles.css';
 
@@ -16,9 +15,14 @@ function AppBar({ toggleDrawer, email }) {
 
   return (
     <div className={styles.appBar}>
-      <div className={styles.iconButton} onClick={toggleDrawer}>
-        <FontAwesomeIcon className={styles.icon} icon={faBars} />
-      </div>
+
+      <IconButton
+        buttonClass={styles.iconButton}
+        iconClass={styles.icon}
+        icon="bars"
+        handleClick={toggleDrawer}
+      />
+
       <div className={styles.heading}>
         Coder Daily
       </div>

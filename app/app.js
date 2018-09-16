@@ -22,6 +22,13 @@ import useScroll from 'react-router-scroll';
 import LanguageProvider from 'containers/LanguageProvider';
 import configureStore from './store';
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+import { faCheckSquare, faBars, faPlus } from '@fortawesome/free-solid-svg-icons';
+
+// configure fortawesome
+library.add(fab, faCheckSquare, faBars, faPlus);
+
 // Import i18n messages
 import { translationMessages } from './i18n';
 
@@ -91,8 +98,6 @@ if (!window.Intl) {
   render(translationMessages);
 }
 
-// configure fortawesome
-// library.add(fab, faCheckSquare, faCoffee);
 
 // Install ServiceWorker and AppCache in the end since
 // it's not most important operation and if main code fails,
